@@ -43,6 +43,23 @@ This site showcases my work, technical skills, certifications, and journey as a 
 - **Image Cartoonifier** – Deployed image transformation tool
 
 
+## 🚀 Deployment Instructions
+
+### Netlify Deployment
+1. Sign up for a free account at [Netlify](https://www.netlify.com/)
+2. Connect your GitHub repository or upload the build folder
+3. Netlify will automatically detect the build settings from the netlify.toml file
+4. Your site will be deployed with a Netlify subdomain (e.g., mehracodes.netlify.app)
+5. You can configure a custom domain in the Netlify dashboard
+
+### Firebase Deployment
+1. Install Firebase CLI: `npm install -g firebase-tools`
+2. Login to Firebase: `firebase login`
+3. Initialize your project: `firebase init` (select Hosting)
+4. Build your project: `npm run build`
+5. Deploy to Firebase: `firebase deploy`
+6. Your site will be available at the Firebase hosting URL
+
 ## 📫 Contact
 
 - GitHub: [Suhanimehra](https://github.com/Suhanimehra)
