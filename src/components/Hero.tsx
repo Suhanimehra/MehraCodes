@@ -67,11 +67,33 @@ const Hero = () => {
                 transition={{ duration: 0.7, delay: 0.5 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
-                <Button variant="default" className="px-6 py-3 text-base">
-                  View My Projects
+                <Button 
+                  variant="default" 
+                  className="px-6 py-3 text-base relative overflow-hidden group"
+                  onClick={() => {
+                    const projectsSection = document.getElementById('projects');
+                    if (projectsSection) {
+                      projectsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <span className="relative z-10">View My Projects</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary to-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
-                <Button variant="outline" className="px-6 py-3 text-base">
-                  Download CV
+                <Button 
+                  variant="outline" 
+                  className="px-6 py-3 text-base relative overflow-hidden group"
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/assets/suhani_resume.pdf';
+                    link.download = 'suhani_resume.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                >
+                  <span className="relative z-10">Download CV</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
               </motion.div>
 

@@ -1,11 +1,25 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { Github, ExternalLink, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useTilt } from "@/hooks/use-tilt";
+import { useRef } from "react";
 
 const Projects = () => {
+  const ref = useRef(null);
+  
+  // Add 3D scroll effects with framer-motion
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const rotateX = useTransform(scrollYProgress, [0, 0.5], [5, 0]);
+  const rotateY = useTransform(scrollYProgress, [0, 0.5], [5, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0.6, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
+  
   const projects = [
     {
       title: "CollegHive",
@@ -50,15 +64,47 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20">
+    <motion.section 
+      id="projects" 
+      className="py-20 relative overflow-hidden"
+      ref={ref}
+      style={{ 
+        perspective: "1000px",
+        opacity,
+        scale,
+        rotateX,
+        rotateY
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-16" data-scroll data-scroll-speed="1.2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="relative inline-block"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 relative z-10">
+              Featured <span className="gradient-text">Projects</span>
+            </h2>
+            <motion.div 
+              className="absolute -right-6 -top-6 text-primary"
+              animate={{ rotate: [0, 15, 0], scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            >
+              <Sparkles size={24} />
+            </motion.div>
+          </motion.div>
+          <motion.p 
+            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             A selection of my technical work – from real-time web apps and machine learning tools to dashboards and accessible platforms.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -71,10 +117,13 @@ const Projects = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               <Card 
-                ref={useTilt({ max: 10, scale: 1.02 })}
-                className="glass-card border-accent/20 hover:border-primary/40 transition-all duration-300 overflow-hidden group"
+                ref={useTilt({ max: 15, scale: 1.05, perspective: 1000, speed: 1000 })}
+                className="glass-card border-accent/20 hover:border-primary/40 transition-all duration-300 overflow-hidden group relative"
+                style={{
+                  transformStyle: "preserve-3d",
+                }}
               >
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden" style={{ transform: "translateZ(20px)" }}>
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -83,7 +132,7 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
-              <CardContent className="p-6">
+              <CardContent className="p-6" style={{ transform: "translateZ(30px)" }}>
                 <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
                 
@@ -96,7 +145,7 @@ const Projects = () => {
                 </div>
               </CardContent>
               
-              <CardFooter className="px-6 pb-6 pt-0">
+              <CardFooter className="px-6 pb-6 pt-0" style={{ transform: "translateZ(40px)" }}>
                 <div className="flex gap-4 w-full">
                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1">
                     <Button variant="glass" size="sm" className="w-full">
@@ -134,7 +183,10 @@ const Projects = () => {
           </a>
         </motion.div>
       </div>
-    </section>
+      {/* 3D decorative elements */}
+      <div className="absolute -z-10 top-1/4 -left-20 w-40 h-40 rounded-full bg-primary/5 blur-3xl"></div>
+      <div className="absolute -z-10 bottom-1/4 -right-20 w-60 h-60 rounded-full bg-secondary/5 blur-3xl"></div>
+    </motion.section>
   );
 };
 
