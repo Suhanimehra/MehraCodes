@@ -7,10 +7,13 @@ import Experience from "@/components/Experience";
 import Achievements from "@/components/Achievements";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <ScrollProgressBar />
       <Navigation />
       <Hero />
       <About />
@@ -20,6 +23,7 @@ const Index = () => {
       <Achievements />
       <Contact />
       <Footer />
+      <FloatingActionButton />
     </div>
   );
 };

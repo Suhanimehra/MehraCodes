@@ -2,6 +2,8 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
+import { useTilt } from "@/hooks/use-tilt";
 
 const Projects = () => {
   const projects = [
@@ -61,7 +63,17 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="glass-card border-accent/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 overflow-hidden group">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <Card 
+                ref={useTilt({ max: 10, scale: 1.02 })}
+                className="glass-card border-accent/20 hover:border-primary/40 transition-all duration-300 overflow-hidden group"
+              >
               <div className="relative overflow-hidden">
                 <img 
                   src={project.image} 
@@ -101,19 +113,26 @@ const Projects = () => {
                 </div>
               </CardFooter>
             </Card>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-        <a 
-          href="https://github.com/Suhanimehra" 
-          target="_blank" 
-          rel="noopener noreferrer">
-          <Button variant="glass" size="lg">
-            View All Projects
-          </Button>
-        </a>
-      </div>
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <a 
+            href="https://github.com/Suhanimehra" 
+            target="_blank" 
+            rel="noopener noreferrer">
+            <Button variant="glass" size="lg" className="hover:scale-105 transition-transform duration-300">
+              View All Projects
+            </Button>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
