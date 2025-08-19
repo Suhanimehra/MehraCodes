@@ -3,14 +3,12 @@
 Welcome to my personal developer portfolio!  
 This site showcases my work, technical skills, certifications, and journey as a **Full-Stack Developer** passionate about building meaningful digital experiences.
 
-![Portfolio Banner](public/assets/avatar.png) <!-- Replace or remove if unnecessary -->
 
 ---
 
 ## 🚀 Live Preview
 
-🔗 [Visit Portfolio](https://your-portfolio-link.com)
-
+🔗 [Visit Portfolio](https://monumental-baklava-998c40.netlify.app/)
 ---
 
 ## 🛠️ Tech Stack
