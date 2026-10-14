@@ -11,24 +11,37 @@ This site showcases my work, technical skills, certifications, and journey as a 
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React.js, Tailwind CSS, Framer Motion
-- **Backend:** Firebase, Node.js
-- **Data / Visualization:** Power BI, Python
-- **Tools:** Git, GitHub, VSCode, Netlify/Vercel
+- **Frontend:** React.js, TypeScript, Tailwind CSS
+- **Animations & Interactions:** Framer Motion, GSAP (with ScrollTrigger & @gsap/react), Anime.js, Lenis (Smooth Scroll)
+- **3D Graphics & Rendering:** Three.js, React Three Fiber (@react-three/fiber), React Three Drei (@react-three/drei)
+- **Icons & UI:** Lucide React, Radix UI Primitives, Sonner
+- **Tools:** Vite, Git, GitHub, VSCode
 
 ---
 
 ## 📁 Project Structure
 
+```text
 /
-├── public/ # Static assets (avatar, images)
+├── public/                # Static assets (avatar, resume, icons)
 ├── src/
-│ ├── components/ # Reusable UI components
-│ ├── pages/ # Page-level components
-│ └── App.tsx
-├── tailwind.config.js
+│   ├── components/
+│   │   ├── effects/       # Visual & animation effects (Background, Cursor, Scroll)
+│   │   ├── layout/        # Layout elements (Navigation, Footer)
+│   │   ├── sections/      # Portfolio sections (Hero, About, Projects, Skills, etc.)
+│   │   ├── theme/         # Theme context & toggles
+│   │   └── ui/            # Reusable UI primitives (Button, Card, Badge, Toast, etc.)
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utility functions (cn, clsx)
+│   ├── pages/             # Page components (Index, NotFound)
+│   ├── App.tsx            # Main application root & providers
+│   ├── index.css          # Global styling & Tailwind utilities
+│   └── main.tsx           # Application entrypoint
+├── tailwind.config.ts
 ├── tsconfig.json
+├── vite.config.ts
 └── README.md
+```
 
 ## 🧠 What I’ve Built
 
