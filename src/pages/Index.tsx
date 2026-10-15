@@ -1,4 +1,5 @@
-import { Navigation, Footer } from "@/components/layout";
+import React from "react";
+import { Footer } from "@/components/layout";
 import {
   Hero,
   About,
@@ -10,30 +11,34 @@ import {
 } from "@/components/sections";
 import {
   CustomCursor,
-  ScrollAnimations,
   BackgroundAnimation,
   ScrollProgressBar,
   FloatingActionButton,
+  SmoothScroll,
 } from "@/components/effects";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <CustomCursor />
-      <ScrollAnimations />
-      <BackgroundAnimation />
-      <ScrollProgressBar />
-      <Navigation />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Experience />
-      <Achievements />
-      <Contact />
-      <Footer />
-      <FloatingActionButton />
-    </div>
+    <SmoothScroll>
+      <div className="min-h-screen bg-background text-foreground relative selection:bg-neutral-800 selection:text-white">
+        <CustomCursor />
+        <BackgroundAnimation />
+        <ScrollProgressBar />
+
+        <main id="main-content">
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <Achievements />
+          <Contact />
+        </main>
+
+        <Footer />
+        <FloatingActionButton />
+      </div>
+    </SmoothScroll>
   );
 };
 

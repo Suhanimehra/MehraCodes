@@ -1,70 +1,82 @@
+import React from "react";
+import { Github, Linkedin, Mail, ArrowUp, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { profile, contact } from "@/data";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-background border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div>
-            <div className="gradient-text text-2xl font-bold mb-4">
-              Portfolio
+    <footer className="border-t border-border bg-card/50 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Brand & Tagline */}
+          <div className="flex flex-col items-center md:items-start space-y-2">
+            <div className="flex items-center gap-2 font-display font-bold text-lg text-foreground">
+              <div className="w-8 h-8 rounded-lg bg-secondary border border-border flex items-center justify-center text-foreground">
+                <Code2 className="w-4 h-4" />
+              </div>
+              <span>
+                {profile.name.split(" ")[0]}
+                <span className="text-muted-foreground font-normal">.Codes</span>
+              </span>
             </div>
-            <p className="text-muted-foreground mb-6">
-              Creating exceptional digital experiences through thoughtful design 
-              and clean code.
+            <p className="text-xs font-mono text-muted-foreground text-center md:text-left">
+              Engineered with React, TypeScript, GSAP & Tailwind CSS.
             </p>
-            <div className="flex space-x-4">
-              <Button variant="glass" size="icon" className="rounded-full">
-                <Github className="h-5 w-5" />
-              </Button>
-              <Button variant="glass" size="icon" className="rounded-full">
-                <Linkedin className="h-5 w-5" />
-              </Button>
-              <Button variant="glass" size="icon" className="rounded-full">
-                <Mail className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {["Home", "About", "Projects", "Contact"].map((link) => (
-                <li key={link}>
-                  <a 
-                    href={`#${link.toLowerCase()}`}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Socials & Back-to-Top */}
+          <div className="flex items-center gap-3">
+            <a
+              href={contact.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-secondary border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href={contact.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-secondary border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href={contact.socials.emailUrl}
+              className="p-2.5 rounded-xl bg-secondary border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>Web Development</li>
-              <li>UI/UX Design</li>
-              <li>PowerBI Dashboard</li>
-              <li>Data Analysis</li>
-            </ul>
+            <div className="h-6 w-px bg-border mx-1" />
+
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollToTop}
+              className="rounded-xl bg-secondary border border-border hover:bg-muted text-muted-foreground hover:text-foreground"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </Button>
           </div>
         </div>
 
-        <div className="border-t border-accent/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm">
-            © {currentYear} Portfolio. All rights reserved.
-          </p>
-          <p className="text-muted-foreground text-sm flex items-center">
-            Made with <Heart className="h-4 w-4 mx-1 text-red-500" /> using React & Tailwind
+        {/* Bottom copyright line */}
+        <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-muted-foreground gap-4">
+          <p>© {currentYear} {profile.name}. All rights reserved.</p>
+          <p className="text-muted-foreground/60">
+            Clean, accessible, production-ready code.
           </p>
         </div>
       </div>

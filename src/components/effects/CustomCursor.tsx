@@ -1,129 +1,84 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isClicked, setIsClicked] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasFinePointer, setHasFinePointer] = useState(false);
 
   useEffect(() => {
-    // Only run in browser environment
-    if (typeof window === 'undefined') return;
-    
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    setHasFinePointer(finePointer);
+
+    if (!finePointer) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseDown = () => setIsClicked(true);
-    const handleMouseUp = () => setIsClicked(false);
+    const handleMouseDown = () => setIsPressed(true);
+    const handleMouseUp = () => setIsPressed(false);
 
-    // Track hover state on interactive elements
-    const handleMouseEnter = (e: MouseEvent) => {
+    const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'A' ||
-        target.closest('button') ||
-        target.closest('a') ||
-        target.getAttribute('role') === 'button'
+        target.tagName === "BUTTON" ||
+        target.tagName === "A" ||
+        target.closest("button") ||
+        target.closest("a") ||
+        target.getAttribute("role") === "button"
       ) {
-        setIsHovering(true);
+        setIsHovered(true);
+      } else {
+        setIsHovered(false);
       }
     };
 
-    const handleMouseLeave = () => {
-      setIsHovering(false);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseover', handleMouseEnter);
-    document.addEventListener('mouseout', handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseover', handleMouseEnter);
-      document.removeEventListener('mouseout', handleMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isVisible]);
 
-  // Hide default cursor
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    // Only hide cursor on desktop devices
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) return;
-    
-    document.body.style.cursor = 'none';
-    
-    // Add cursor-none class to all interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, [role="button"]');
-    interactiveElements.forEach(el => {
-      el.classList.add('cursor-none');
-    });
-
-    return () => {
-      document.body.style.cursor = '';
-      interactiveElements.forEach(el => {
-        el.classList.remove('cursor-none');
-      });
-    };
-  }, []);
-
-  // Don't render cursor on mobile devices
-  if (typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-    return null;
-  }
+  if (!hasFinePointer || !isVisible) return null;
 
   return (
     <>
-      {/* Main cursor */}
+      {/* Central matte dot */}
       <motion.div
-        className="fixed pointer-events-none z-50 rounded-full mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[100] w-1.5 h-1.5 rounded-full bg-foreground"
         style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          backgroundColor: '#fff',
+          x: mousePosition.x - 3,
+          y: mousePosition.y - 3,
         }}
-        animate={{
-          width: isHovering ? 60 : isClicked ? 16 : 24,
-          height: isHovering ? 60 : isClicked ? 16 : 24,
-          x: isHovering ? -30 : -12,
-          y: isHovering ? -30 : -12,
-          opacity: 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: 28,
-          mass: 0.5,
-        }}
+        transition={{ type: "spring", stiffness: 1000, damping: 50 }}
       />
-      
-      {/* Trailing cursor */}
+
+      {/* Outer follow ring */}
       <motion.div
-        className="fixed pointer-events-none z-40 rounded-full bg-primary/30"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-        }}
+        className="fixed top-0 left-0 pointer-events-none z-[99] rounded-full border border-foreground/30 bg-foreground/5"
         animate={{
-          width: isClicked ? 40 : 12,
-          height: isClicked ? 40 : 12,
-          x: -6,
-          y: -6,
-          opacity: 0.6,
+          x: mousePosition.x - (isHovered ? 20 : 14),
+          y: mousePosition.y - (isHovered ? 20 : 14),
+          width: isHovered ? 40 : isPressed ? 22 : 28,
+          height: isHovered ? 40 : isPressed ? 22 : 28,
+          borderColor: isHovered ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.2)",
         }}
         transition={{
-          type: 'spring',
-          stiffness: 200,
-          damping: 20,
-          mass: 0.8,
-          delay: 0.03,
+          type: "spring",
+          stiffness: 450,
+          damping: 30,
+          mass: 0.6,
         }}
       />
     </>

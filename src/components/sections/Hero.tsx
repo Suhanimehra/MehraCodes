@@ -1,226 +1,195 @@
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
+import { Github, Linkedin, Mail, Terminal, ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { profile, contact } from "@/data";
+
+interface WordProps {
+  children: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}
+
+const ScrollWord: React.FC<WordProps> = ({ children, progress, range }) => {
+  const opacity = useTransform(progress, range, [0.18, 1]);
+  const y = useTransform(progress, range, [4, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, y }}
+      className="inline-block transition-colors mr-[0.28em] will-change-transform"
+    >
+      {children}
+    </motion.span>
+  );
+};
 
 const Hero = () => {
-  const ref = useRef(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Track scroll progress across the hero section
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
+    target: containerRef,
+    offset: ["start start", "end 0.2"],
   });
-  
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
-  
-  useEffect(() => {
-    // Simulate content loading
-    const timer = setTimeout(() => setIsLoaded(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-  
+
+  // Manifesto paragraph to reveal word-by-word on scroll
+  const manifesto =
+    "I engineer high-performance web systems, real-time computer vision models, and analytical dashboards. Built with architectural discipline, clean modular code, and an obsession with speed.";
+
+  const words = manifesto.split(" ");
+
+  // Headline subtle parallax and fade on deep scroll
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0.25]);
+  const headlineScale = useTransform(scrollYProgress, [0, 0.45], [1, 0.97]);
+
   return (
-    <motion.section
-      ref={ref}
+    <section
+      ref={containerRef}
       id="home"
-      style={{ opacity, scale }}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background text-foreground"
+      className="relative min-h-[140vh] border-b border-border/40 flex flex-col justify-between pt-16 pb-24 px-6 max-w-7xl mx-auto"
     >
-      <AnimatePresence>
-        {isLoaded && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10"
-          >
-
-            {/* Left Content */}
-            <div className="space-y-6 text-center md:text-left">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="text-5xl md:text-6xl font-extrabold leading-tight relative z-10"
-              >
-                Hi, I'm <span className="gradient-text">Suhani Mehra</span>
-                <br />
-                <span className="text-primary">Full-Stack Developer</span>
-              </motion.h1>
-
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="text-muted-foreground text-lg max-w-xl mx-auto md:mx-0"
-              >
-                Passionate about building scalable web apps, intuitive dashboards, and data-driven solutions using React, Python, Firebase, and Power BI.
-              </motion.p>
-
-              {/* CTA Buttons */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
-              >
-                <Button 
-                  variant="default" 
-                  className="px-6 py-3 text-base relative overflow-hidden group"
-                  onClick={() => {
-                    const projectsSection = document.getElementById('projects');
-                    if (projectsSection) {
-                      projectsSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <span className="relative z-10">View My Projects</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary to-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="px-6 py-3 text-base relative overflow-hidden group"
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = '/assets/suhani_resume.pdf';
-                    link.download = 'suhani_resume.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                >
-                  <span className="relative z-10">Download CV</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                </Button>
-              </motion.div>
-
-              {/* Social Icons */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.7 }}
-                className="flex gap-4 mt-4 justify-center md:justify-start"
-              >
-                <a href="https://github.com/Suhanimehra" target="_blank" rel="noopener noreferrer">
-                  <Github className="w-5 h-5 hover:text-primary transition" />
-                </a>
-                <a href="https://www.linkedin.com/in/suhanimehra" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-5 h-5 hover:text-primary transition" />
-                </a>
-                <a href="mailto:mehrasuhani.sm88@gmail.com">
-                  <Mail className="w-5 h-5 hover:text-primary transition" />
-                </a>
-              </motion.div>
-            </div>{/* Right Side Avatar */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex justify-center md:justify-end relative z-10"
-            >
-              <img
-                src="/assets/avatar.png" 
-                alt="Suhani Avatar"
-                className="w-[320px] md:w-[400px] object-contain drop-shadow-xl rounded-full"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+      {/* Top Meta Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 pb-12 border-b border-border/40 font-mono text-xs text-muted-foreground"
       >
-        <motion.p 
-          className="text-sm text-muted-foreground mb-2"
-          animate={{ y: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          Scroll to explore
-        </motion.p>
+        <div className="flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-foreground tracking-wide uppercase font-medium">
+            {profile.name}
+          </span>
+          <span className="text-neutral-600">/</span>
+          <span>{profile.title}</span>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <span className="hidden md:inline-block text-neutral-500">
+            {contact.location}
+          </span>
+          <div className="flex items-center gap-3">
+            <a
+              href={contact.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href={contact.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href={contact.socials.emailUrl}
+              className="hover:text-foreground transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Massive Enlarged Headline */}
+      <motion.div
+        style={{ opacity: headlineOpacity, scale: headlineScale }}
+        className="py-16 md:py-24 space-y-6"
+      >
+        <div className="space-y-1">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-display tracking-tighter text-foreground leading-[0.92] select-none">
+              SOFTWARE
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-display tracking-tighter text-muted-foreground/80 leading-[0.92] select-none">
+              ENGINEER
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-display tracking-tighter text-foreground leading-[0.92] select-none">
+              & ANALYST.
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Status prompt */}
         <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="flex items-center gap-3 pt-4 text-xs font-mono text-muted-foreground"
         >
-          <ChevronDown className="w-5 h-5 text-primary" />
+          <Terminal className="w-3.5 h-3.5 text-foreground" />
+          <span>{profile.systemConfig.stack.join(" • ")}</span>
         </motion.div>
       </motion.div>
 
+      {/* Scroll-Driven Text Reveal Paragraph */}
+      <div className="pt-12 pb-20 border-t border-border/40">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+          <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground shrink-0 pt-2">
+            [ Manifesto // 01 ]
+          </div>
 
-
-      {/* Enhanced background animation */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Animated shapes */}
-        {[...Array(20)].map((_, i) => {
-          const size = Math.random() * 150 + 50;
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full blur-xl"
-              initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                scale: Math.random() * 0.5 + 0.5,
-                background: i % 3 === 0 
-                  ? 'radial-gradient(circle, rgba(var(--primary), 0.3) 0%, rgba(var(--primary), 0) 70%)' 
-                  : i % 3 === 1 
-                    ? 'radial-gradient(circle, rgba(var(--secondary), 0.3) 0%, rgba(var(--secondary), 0) 70%)' 
-                    : 'radial-gradient(circle, rgba(var(--accent), 0.3) 0%, rgba(var(--accent), 0) 70%)',
-              }}
-              animate={{
-                x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-                scale: [Math.random() * 0.5 + 0.5, Math.random() * 0.8 + 0.2],
-              }}
-              transition={{
-                duration: 15 + Math.random() * 30,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-              }}
-              style={{
-                width: size,
-                height: size,
-                opacity: Math.random() * 0.4 + 0.1,
-              }}
-            />
-          );
-        })}
-        
-        {/* Animated gradient mesh */}
-        <motion.div 
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: 'radial-gradient(circle at 30% 30%, rgba(var(--primary), 0.4) 0%, rgba(var(--primary), 0) 70%), radial-gradient(circle at 70% 70%, rgba(var(--secondary), 0.4) 0%, rgba(var(--secondary), 0) 70%), radial-gradient(circle at 50% 50%, rgba(var(--accent), 0.3) 0%, rgba(var(--accent), 0) 70%)'
-          }}
-          animate={{
-            background: [
-              'radial-gradient(circle at 30% 30%, rgba(var(--primary), 0.4) 0%, rgba(var(--primary), 0) 70%), radial-gradient(circle at 70% 70%, rgba(var(--secondary), 0.4) 0%, rgba(var(--secondary), 0) 70%), radial-gradient(circle at 50% 50%, rgba(var(--accent), 0.3) 0%, rgba(var(--accent), 0) 70%)',
-              'radial-gradient(circle at 40% 40%, rgba(var(--primary), 0.4) 0%, rgba(var(--primary), 0) 70%), radial-gradient(circle at 60% 60%, rgba(var(--secondary), 0.4) 0%, rgba(var(--secondary), 0) 70%), radial-gradient(circle at 40% 60%, rgba(var(--accent), 0.3) 0%, rgba(var(--accent), 0) 70%)',
-              'radial-gradient(circle at 30% 30%, rgba(var(--primary), 0.4) 0%, rgba(var(--primary), 0) 70%), radial-gradient(circle at 70% 70%, rgba(var(--secondary), 0.4) 0%, rgba(var(--secondary), 0) 70%), radial-gradient(circle at 50% 50%, rgba(var(--accent), 0.3) 0%, rgba(var(--accent), 0) 70%)'
-            ]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background opacity-80" />
+          <div className="max-w-4xl">
+            <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium font-display leading-[1.25] tracking-tight">
+              {words.map((word, i) => {
+                const start = (i / words.length) * 0.7;
+                const end = start + (1 / words.length) * 1.5;
+                return (
+                  <ScrollWord
+                    key={`${word}-${i}`}
+                    progress={scrollYProgress}
+                    range={[Math.min(start, 0.85), Math.min(end, 0.98)]}
+                  >
+                    {word}
+                  </ScrollWord>
+                );
+              })}
+            </p>
+          </div>
+        </div>
       </div>
-    </motion.section>
+
+      {/* Bottom Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
+        className="flex items-center justify-between text-xs font-mono text-muted-foreground/60 pt-6 border-t border-border/20"
+      >
+        <span className="uppercase tracking-wider">
+          {profile.systemConfig.metrics.map((m) => `${m.value} ${m.label}`).join(" • ")}
+        </span>
+        <div className="flex items-center gap-2">
+          <span>SCROLL TO EXPLORE</span>
+          <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+        </div>
+      </motion.div>
+    </section>
   );
 };
 

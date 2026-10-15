@@ -1,0 +1,249 @@
+{
+  "profile": {
+    "name": "Suhani Mehra",
+    "brand": "Mehra.Codes",
+    "title": "Full-Stack Software Engineer & Data Analyst",
+    "headline": {
+      "line1": "Full-Stack",
+      "line2": "Software Engineer",
+      "line3": "& Data Analyst."
+    },
+    "status": "AVAILABLE FOR NEW OPPORTUNITIES",
+    "bio": "I build scalable web platforms, real-time computer vision systems, and analytical dashboards using React, Python, and modern cloud technologies.",
+    "shortBio": "A self-driven Computer Science engineer combining strong algorithmic foundations with modern web interfaces and data analytics.",
+    "resumePath": "/assets/suhani_resume.pdf",
+    "systemConfig": {
+      "fileName": "suhani.config.ts",
+      "specialization": [
+        "Web Architecture",
+        "Computer Vision",
+        "Data Dashboards"
+      ],
+      "stack": [
+        "React",
+        "TypeScript",
+        "Python",
+        "OpenCV",
+        "Power BI"
+      ],
+      "status": "ready_to_deploy",
+      "metrics": [
+        { "label": "Projects Shipped", "value": "15+" },
+        { "label": "CV Precision", "value": "90%+" }
+      ]
+    }
+  },
+  "contact": {
+    "email": "mehrasuhani.sm88@gmail.com",
+    "phone": "+91 9302389628",
+    "location": "Gwalior, Madhya Pradesh, India",
+    "socials": {
+      "github": "https://github.com/Suhanimehra",
+      "linkedin": "https://www.linkedin.com/in/suhanimehra",
+      "emailUrl": "mailto:mehrasuhani.sm88@gmail.com"
+    },
+    "engagements": [
+      "• Full-Stack Engineering",
+      "• Frontend Architecture (React)",
+      "• Data Analytics & Power BI",
+      "• Full-Time & Contract Roles"
+    ]
+  },
+  "about": {
+    "philosophy": {
+      "tag": "My Philosophy",
+      "heading": "Turning complex problems into clean, maintainable systems.",
+      "paragraph1": "From developing computer vision systems with real-time facial recognition to creating accessible travel booking platforms and enterprise-grade data dashboards, my focus is practical engineering impact.",
+      "paragraph2": "I prioritize clean architecture, performant user interactions, and robust layouts that look exceptional across every screen size."
+    },
+    "stats": [
+      {
+        "value": "15+",
+        "label": "Projects Shipped & Deployed"
+      },
+      {
+        "value": "Full-Stack",
+        "label": "React • Python • Cloud • Power BI"
+      }
+    ],
+    "pillars": [
+      {
+        "id": "web",
+        "title": "Full-Stack Web Engineering",
+        "desc": "Architecting responsive, high-performance web applications using React, TypeScript, Vite, and clean modular state management."
+      },
+      {
+        "id": "data",
+        "title": "Data Intelligence & Analytics",
+        "desc": "Transforming raw data into actionable insights through custom Python analytics pipelines and executive Power BI dashboards."
+      },
+      {
+        "id": "cloud",
+        "title": "Scalable Systems & Cloud",
+        "desc": "Designing secure backend services, Firebase cloud solutions, and robust REST APIs with Python (Flask/Django)."
+      }
+    ]
+  },
+  "projects": [
+    {
+      "title": "CollegHive — Campus Collaboration Hub",
+      "category": "Full-Stack Web App",
+      "description": "A centralized real-time campus collaboration platform enabling verified student networking, academic resource sharing, and campus event coordination.",
+      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80",
+      "technologies": ["React.js", "Firebase", "Firestore", "Tailwind CSS"],
+      "github": "https://github.com/Suhanimehra",
+      "featured": true
+    },
+    {
+      "title": "Real-Time Face Recognition Attendance",
+      "category": "AI & Computer Vision",
+      "description": "Automated attendance system leveraging OpenCV facial landmark detection with 90%+ recognition precision and instant database synchronization.",
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+      "technologies": ["Python", "OpenCV", "SQLite", "NumPy"],
+      "github": "https://github.com/Suhanimehra/Face-Recognition_attendance-system",
+      "live": "https://face-recognition-attendance-system-6.onrender.com/",
+      "featured": true
+    },
+    {
+      "title": "TapNTrip — Accessible Travel Booking",
+      "category": "Web Application & UX",
+      "description": "Designed specifically for elderly and accessibility-first travelers, featuring high-contrast intuitive navigation, assistive booking, and role-based auth.",
+      "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop&q=80",
+      "technologies": ["React.js", "Firebase Auth", "Tailwind CSS"],
+      "github": "https://github.com/Suhanimehra/TapNTrip",
+      "live": "https://tap-n-trip.vercel.app/"
+    },
+    {
+      "title": "Delhi Climate Intelligence Dashboard",
+      "category": "Data Analytics & BI",
+      "description": "Comprehensive Power BI interactive dashboard visualizing multi-year historical temperature, air pressure, and climate volatility metrics.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+      "technologies": ["Power BI", "DAX", "Data Modeling", "Python"],
+      "github": "https://github.com/Suhanimehra"
+    },
+    {
+      "title": "Image Cartoonifier & Neural Filter",
+      "category": "Computer Vision & Processing",
+      "description": "A cloud-hosted image transformation tool applying bilateral filtering and adaptive edge masking to render photographs as comic illustrations.",
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+      "technologies": ["Python", "OpenCV", "Flask", "Render"],
+      "github": "https://github.com/Suhanimehra",
+      "live": "https://image-cartoonifier-1.onrender.com/"
+    }
+  ],
+  "skills": {
+    "competencies": [
+      {
+        "name": "Frontend Engineering (React & TypeScript)",
+        "level": 94,
+        "description": "Modular component architecture, modern state, Next.js, and performance tuning."
+      },
+      {
+        "name": "Python & Computer Vision (OpenCV)",
+        "level": 90,
+        "description": "Automated facial recognition, real-time image filtering, NumPy & Pandas analytics."
+      },
+      {
+        "name": "Data Analytics & Power BI",
+        "level": 88,
+        "description": "DAX measures, relational star schema modeling, interactive KPI executive reporting."
+      },
+      {
+        "name": "Cloud Backend & RESTful Services",
+        "level": 85,
+        "description": "Firebase Firestore, Flask/Django APIs, secure authentication, and cloud deployment."
+      }
+    ],
+    "categories": [
+      {
+        "id": "languages",
+        "title": "Core Languages",
+        "description": "Foundational programming and scripting languages for production systems",
+        "skills": ["Python", "TypeScript", "JavaScript", "C / C++", "SQL", "HTML5 & CSS3"]
+      },
+      {
+        "id": "frontend",
+        "title": "Frontend & UI",
+        "description": "Modern client-side frameworks, libraries, and design systems",
+        "skills": ["React.js", "Next.js", "Tailwind CSS", "Vite", "Framer Motion", "Radix UI", "State Management"]
+      },
+      {
+        "id": "data",
+        "title": "Data & Machine Vision",
+        "description": "Exploratory data analysis, mathematical modeling, and computer vision",
+        "skills": ["Power BI", "OpenCV", "Pandas", "NumPy", "DAX Modeling", "Exploratory Analytics", "Data Cleaning"]
+      },
+      {
+        "id": "backend",
+        "title": "Backend & Cloud",
+        "description": "Server runtimes, databases, cloud platforms, and developer tooling",
+        "skills": ["Firebase Firestore", "Flask", "Django", "Node.js", "Git & GitHub", "Cloud Deployments", "REST APIs"]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "role": "Full-Stack Web Development Intern",
+      "company": "Eways Services",
+      "location": "Remote / Hybrid",
+      "period": "May 2024 – July 2024",
+      "description": "Spearheaded development of a high-accessibility pilgrimage booking application tailored for senior citizens and elderly travelers.",
+      "highlights": [
+        "Architected responsive, accessible UI with React.js, Tailwind CSS, and Firebase authentication.",
+        "Engineered assistive voice search and instant multi-channel emergency alert dispatch.",
+        "Optimized client performance, achieving sub-second page transitions across mobile devices."
+      ],
+      "technologies": ["React.js", "Firebase", "Tailwind CSS", "JavaScript", "REST APIs"]
+    },
+    {
+      "role": "Undergraduate Computer Science Researcher & Developer",
+      "company": "Academic & Open-Source Projects",
+      "location": "MITS",
+      "period": "2023 – Present",
+      "description": "Led end-to-end development of data-intensive systems, including real-time facial recognition attendance and campus collaboration platforms.",
+      "highlights": [
+        "Engineered automated OpenCV face recognition pipeline delivering 90%+ recognition precision.",
+        "Designed and delivered interactive Power BI dashboards for climate and operational analytics.",
+        "Active mentor and collaborator in peer hackathons and competitive programming challenges."
+      ],
+      "technologies": ["Python", "OpenCV", "Power BI", "DAX", "SQL", "Git"]
+    }
+  ],
+  "achievements": [
+    {
+      "title": "User-Centric Computing for Human-Computer Interaction",
+      "issuer": "IIT Guwahati (NPTEL)",
+      "category": "Specialized Course",
+      "description": "Deep dive into usability engineering, heuristic evaluation, and interaction architectures.",
+      "link": "https://nptel.ac.in"
+    },
+    {
+      "title": "IBM SkillsBuild: Decoding Data Insights & Impact",
+      "issuer": "IBM",
+      "category": "Professional Credential",
+      "description": "Data exploration, statistical modeling foundations, and strategic visualization principles.",
+      "link": "https://skillsbuild.org"
+    },
+    {
+      "title": "Kaggle Learning Track: Python, ML & Data Wrangling",
+      "issuer": "Kaggle",
+      "category": "Applied Machine Learning",
+      "description": "Hands-on data preprocessing, exploratory data analysis, time-series, and model evaluation.",
+      "link": "https://www.kaggle.com"
+    },
+    {
+      "title": "National Cadet Corps (NCC) ‘C’ Certificate",
+      "issuer": "Ministry of Defence, Govt of India",
+      "category": "Leadership & Discipline",
+      "description": "Demonstrated discipline, operational leadership, and team camaraderie through NCC service.",
+      "link": ""
+    },
+    {
+      "title": "Code Condolence — 9th Place",
+      "issuer": "MITS Inter-College Coding Event",
+      "category": "Competitive Programming",
+      "description": "Ranked 9th out of hundreds of competitors solving algorithmic and data structure problems under time constraints.",
+      "link": ""
+    }
+  ]
+}
