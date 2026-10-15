@@ -1,0 +1,83 @@
+/*
+ * MehraCodes – Font System
+ * Loaded via Google Fonts in index.html, declared here as utility classes.
+ */
+
+/* ─── Font Family Utilities ─── */
+.font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Typographic Scale ─── */
+
+/* Hero heading — massive, tight tracking */
+.text-hero {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* Section headings */
+.text-section {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Card / subsection headings */
+.text-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Body text — readable */
+.text-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+/* Body large — section descriptions */
+.text-body-lg {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+/* Small captions / labels */
+.text-caption {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Code / tech badge text */
+.text-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
