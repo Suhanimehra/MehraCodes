@@ -6,7 +6,7 @@ This site showcases my work, technical skills, certifications, and journey as a 
 
 ---
 
-🔗 [Visit Portfolio](https://monumental-baklava-998c40.netlify.app/)
+🔗 [Visit Portfolio](https://mehra-codes.vercel.app)
 ---
 
 ## 🛠️ Tech Stack
